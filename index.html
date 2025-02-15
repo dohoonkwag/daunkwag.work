@@ -1,16 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daun Kwag</title>
-    <link rel="stylesheet" href="./homepage.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daun Kwag</title>
+  <link rel="stylesheet" href="homepage.css">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-    <div class="header">
-        <div class="logo">Daun</div>
-        <div class="about">About</div>
-        <div class="contact">Contact</div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">DK</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="hero-text">
+      <h1>Welcome,</h1>
+      <h1>I'm Daun</h1>
     </div>
+  </section>
+
+  <!-- Scrollable Sections -->
+  <section class="section" id="services">
+    <h2>Services</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi.</p>
+    <a href="#" class="button">Learn More</a>
+  </section>
+
+  <section class="section" id="about">
+    <h2>About</h2>
+    <p>Curabitur at sapien quis lorem tincidunt ultrices ut id magna.</p>
+    <a href="#" class="button">Read More</a>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact</h2>
+    <p>Feel free to reach out for collaborations or just to say hi.</p>
+    <a href="#" class="button">Get in Touch</a>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>

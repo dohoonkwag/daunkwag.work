@@ -1,7 +1,246 @@
-.header {
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+  }
+  
+  /* Color Palette */
+  :root {
+    --dark-green1: #0F2D21;
+    --dark-green2: #1B3A2B;
+    --dark-green3: #2F4A34;
+    --dark-green4: #4F6F52;
+    --dark-green5: #EAE7DC;
+    --white: #ffffff;
+
+    /*--dark-green1: #3c5b40;
+    --dark-green2: #2f4a34;
+    --dark-green3: #253b2a;
+    --dark-green4: #1c2e21;
+    --dark-green5: #132418;
+    --white: #ffffff; */
+  }
+  
+  /* Header */
+  .header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px 40px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+    background: transparent;
+    transition: background-color 0.5s ease, transform 0.3s ease;
+  }
+  
+  .header.scrolled {
+    background: var(--dark-green3);
+  }
+  
+  .header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    transition: color 0.5s ease, transform 0.3s ease;
+  }
+  
+  .header.scrolled .logo {
+    color: white;
+  }
+  
+  /* Navigation */
+  nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+  }
+  
+  .nav-links li {
+    display: inline;
+  }
+  
+  .nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Underline animation for nav links */
+  .nav-links li a {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
-.logo {
-    
+  .nav-links li a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -3px; /* Adjust the distance below the text */
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-50%);
 }
+
+  .nav-links li a:hover::after {
+    width: 100%;
+}
+
+  .header.scrolled .nav-links li a {
+    color: white;
+  }
+
+  /* Hamburger Menu */
+  .hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+  }
+  
+  /* Hero Section */
+  .hero {
+    width: 100vw;
+    height: 100vh;
+    background: url("./images/Daun2.jpg") no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10vw;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    position: relative;
+  }
+  
+  /* Dark overlay */
+  .hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Hero Text */
+  .hero-text {
+    position: relative;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: right;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+  }
+  
+  /* Scrollable Sections */
+  .section {
+    width: 100%;
+    padding: 80px 15vw;
+    text-align: center;
+    background: var(--dark-green1);
+    color: var(--white);
+  }
+  
+  .section:nth-child(odd) {
+    background: var(--dark-green2);
+  }
+  
+  .section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .section p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+  
+  /* Style for buttons */
+.button {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 2px solid #ffffff; /* White border */
+    border-radius: 8px; /* Rounded corners */
+    color: #ffffff; /* Text color */
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Button hover animation */
+.button:hover {
+    background: #ffffff;
+    color: #000000; /* Change text color on hover */
+    transform: scale(1.05); /* Slightly enlarge */
+}
+
+/* Button click effect */
+.button:active {
+    transform: scale(0.95); /* Slight shrink effect */
+}
+
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .hero-text {
+      text-align: center;
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      background: var(--dark-green4);
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      padding: 20px;
+      border-radius: 5px;
+    }
+  
+    .nav-links.active {
+      display: flex;
+    }
+  
+    .hamburger {
+      display: block;
+      color: white;
+    }
+
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    .container {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }        
+  }
