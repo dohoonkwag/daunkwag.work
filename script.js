@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
         heroText.style.opacity = 1;
         heroText.style.transform = "translateY(0)";
-    }, 1000);
+    }, 1500);
 
     // Fade in header and its elements
     setTimeout(() => {
@@ -30,5 +30,14 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             header.classList.remove("scrolled");
         }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
     });
 });
