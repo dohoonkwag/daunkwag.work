@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const hero = document.querySelector(".hero");
     const heroText = document.querySelector(".hero-text");
     const header = document.querySelector(".header");
-    const hamburger = document.querySelector(".hamburger");
-    const mobileMenu = document.querySelector(".mobile-menu");
+    const navLinks = document.querySelectorAll(".nav-links li a");
+    const logo = document.querySelector(".logo");
 
     // Fade in hero background
     setTimeout(() => {
@@ -16,6 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
         heroText.style.transform = "translateY(0)";
     }, 1000);
 
+    // Fade in header and its elements
+    setTimeout(() => {
+        header.style.opacity = 1;
+        logo.style.opacity = 1;
+        navLinks.forEach(link => link.style.opacity = 1);
+    }, 1000);
+
     // Detect scroll and change header background
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
@@ -25,4 +32,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-

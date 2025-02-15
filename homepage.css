@@ -35,7 +35,8 @@
     justify-content: space-between;
     z-index: 100;
     background: transparent;
-    transition: background-color 0.5s ease, transform 0.3s ease;
+    transition: background-color 0.5s ease, transform 0.3s ease, opacity 2s ease-in-out;
+    opacity: 0;
   }
   
   .header.scrolled {
@@ -53,59 +54,69 @@
     color: white;
   }
   
-  /* Navigation */
-  nav {
-    display: flex;
-    align-items: center;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 40px;
-  }
-  
-  .nav-links li {
-    display: inline;
-  }
-  
-  .nav-links li a {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
-  
-  /* Underline animation for nav links */
-  .nav-links li a {
-    position: relative;
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
-    transition: color 0.3s ease;
+/* Fade-in effect for header elements */
+.header .logo, .nav-links li a {
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
 }
 
-  .nav-links li a::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -3px; /* Adjust the distance below the text */
-    width: 0;
-    height: 2px;
-    background-color: white;
-    transition: all 0.3s ease-in-out;
-    transform: translateX(-50%);
+.header.scrolled .logo, .header.scrolled .nav-links li a {
+  color: white;
 }
 
-  .nav-links li a:hover::after {
-    width: 100%;
+/* Navigation */
+nav {
+  display: flex;
+  align-items: center;
 }
 
-  .header.scrolled .nav-links li a {
-    color: white;
-  }
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Underline animation for nav links */
+.nav-links li a {
+  position: relative;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+.header.scrolled .nav-links li a {
+  color: white;
+}
 
   /* Hamburger Menu */
   .hamburger {
