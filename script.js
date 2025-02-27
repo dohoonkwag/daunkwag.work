@@ -1,82 +1,151 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Only run animations on homepage
-    if (document.querySelector(".hero")) {
-        const hero = document.querySelector(".hero");
-        const heroText = document.querySelector(".hero-text");
-        const header = document.querySelector(".header");
-        const navLinks = document.querySelectorAll(".nav-links li a");
-        const logo = document.querySelector(".logo");
+// Initialize GSAP ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
 
-        // Fade in hero background
-        setTimeout(() => {
-            hero.style.opacity = 1;
-        }, 500);
+// Custom cursor
+document.addEventListener('DOMContentLoaded', () => {
+  const cursor = document.querySelector('.cursor');
+  const cursorFollower = document.querySelector('.cursor-follower');
+  const links = document.querySelectorAll('a, button, .menu-toggle');
+  
+  document.addEventListener('mousemove', (e) => {
+    gsap.to(cursor, {
+      x: e.clientX,
+      y: e.clientY,
+      duration: 0.1
+    });
+    
+    gsap.to(cursorFollower, {
+      x: e.clientX,
+      y: e.clientY,
+      duration: 0.3
+    });
+  });
+  
+  links.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+      cursorFollower.style.width = '0px';
+      cursorFollower.style.height = '0px';
+    });
+    
+    link.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      cursorFollower.style.width = '40px';
+      cursorFollower.style.height = '40px';
+    });
+  });
 
-        // Fade in hero text
-        setTimeout(() => {
-            heroText.style.opacity = 1;
-            heroText.style.transform = "translateY(0)";
-        }, 1500);
+  // Navigation toggle
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navigation = document.querySelector('.navigation');
+  
+  menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navigation.classList.toggle('open');
+  });
 
-        // Fade in header and its elements
-        setTimeout(() => {
-            header.style.opacity = 1;
-            logo.style.opacity = 1;
-            navLinks.forEach(link => link.style.opacity = 1);
-        }, 1000);
-    } else {
-        // For other pages, make header immediately visible with background
-        const header = document.querySelector(".header");
-        const navLinks = document.querySelectorAll(".nav-links li a");
-        const logo = document.querySelector(".logo");
-        
-        header.style.opacity = 1;
-        header.classList.add("scrolled");
-        logo.style.opacity = 1;
-        navLinks.forEach(link => link.style.opacity = 1);
+  // Page navigation with transitions
+  const transitionLinks = document.querySelectorAll('a[href]:not([target="_blank"])');
+  const transitionOverlay = document.querySelector('.transition-overlay');
+  
+  transitionLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href.includes('#') || href === '') return;
+      
+      e.preventDefault();
+      
+      gsap.to(transitionOverlay, {
+        y: 0,
+        duration: 0.5,
+        onComplete: () => {
+          window.location.href = href;
+        }
+      });
+    });
+  });
+
+  // Initial page load animation
+  gsap.from(transitionOverlay, {
+    y: 0,
+    duration: 0.5,
+    delay: 0.2,
+    onComplete: () => {
+      gsap.set(transitionOverlay, { y: '100%' });
     }
+  });
 
-    // Common elements for all pages
-    const header = document.querySelector(".header");
-    const hamburger = document.querySelector(".hamburger");
-    const navLinksContainer = document.querySelector(".nav-links");
-    const navLinks = document.querySelectorAll(".nav-links li a");
+  // Fade-in animations
+  const fadeElements = document.querySelectorAll('.fade-in');
+  
+  fadeElements.forEach(element => {
+    ScrollTrigger.create({
+      trigger: element,
+      start: 'top 80%',
+      onEnter: () => element.classList.add('active')
+    });
+  });
 
-    // Detect scroll and change header background
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-            header.classList.add("scrolled");
-        } else {
-            if (!navLinksContainer.classList.contains("active") && document.querySelector(".hero")) {
-                header.classList.remove("scrolled");
-            }
+  // Section animations
+  const sections = document.querySelectorAll('.section');
+  
+  sections.forEach(section => {
+    gsap.from(section.querySelector('.section-title'), {
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%'
+      }
+    });
+    
+    gsap.from(section.querySelector('.section-text'), {
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      delay: 0.2,
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%'
+      }
+    });
+    
+    if (section.querySelector('.btn')) {
+      gsap.from(section.querySelector('.btn'), {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        delay: 0.4,
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 80%'
         }
-    });
+      });
+    }
+  });
 
-    // Toggle menu and add active class to hamburger
-    hamburger.addEventListener("click", () => {
-        navLinksContainer.classList.toggle("active");
-        hamburger.classList.toggle("active");
-        
-        // Add menu-active class to header when menu is open (for mobile background)
-        if (navLinksContainer.classList.contains("active")) {
-            header.classList.add("menu-active");
-        } else {
-            header.classList.remove("menu-active");
-            
-            // Remove scrolled if we're at the top and on homepage
-            if (window.scrollY <= 50 && document.querySelector(".hero")) {
-                header.classList.remove("scrolled");
-            }
-        }
+  // Text reveal animations for headings with reveal-text class
+  const textReveals = document.querySelectorAll('.reveal-text');
+  textReveals.forEach(text => {
+    text.innerHTML = `<span>${text.textContent}</span>`;
+    const textSpan = text.querySelector('span');
+    textSpan.style.display = 'block';
+    
+    let delay = 0;
+    if (text.classList.contains('delay-1')) delay = 0.2;
+    if (text.classList.contains('delay-2')) delay = 0.4;
+    
+    gsap.from(textSpan, {
+      y: '100%',
+      duration: 1.5,
+      delay: delay,
+      ease: 'power4.out',
+      scrollTrigger: {
+        trigger: text,
+        start: 'top 80%',
+        once: true
+      }
     });
-
-    // Close menu when a nav link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener("click", () => {
-            navLinksContainer.classList.remove("active");
-            hamburger.classList.remove("active");
-            header.classList.remove("menu-active");
-        });
-    });
+  });
 });
