@@ -179,6 +179,8 @@ nav {
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+  max-width: 100%;
+  padding-right: 20px; /* Add padding to prevent text overflow */
 }
 
 /* Scrollable Sections */
@@ -249,13 +251,16 @@ nav {
   /* Hero text positioning */
   .hero-text {
     text-align: center;
-    width: 100%;
+    
+    width: 90%; /* Slightly reduced width to ensure padding */
     position: absolute;
-    top: 30%; /* Moved higher up */
+    top: auto;
+    bottom: 20%;
     left: 50%;
-    transform: translateX(-50%);
-    padding: 0 20px;
-    font-size: 2rem;
+    transform: translateX(-10%); /* Center horizontally */
+    padding: 0; /* Reset padding for mobile */
+    font-size: 2rem; /* Slightly smaller font on mobile */
+    word-wrap: break-word; /* Ensure text wraps if needed */
   }
   
   /* Mobile navigation */
