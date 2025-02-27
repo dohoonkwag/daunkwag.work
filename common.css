@@ -54,6 +54,37 @@
     flex: 1;
   }
   
+  /* NEW: Image-text section for inner pages */
+  .image-text-section {
+    display: flex;
+    gap: 30px;
+    margin: 40px 0;
+    align-items: center;
+  }
+  
+  .image-text-section.reverse {
+    flex-direction: row-reverse;
+  }
+  
+  .image-text-section .text-content {
+    flex: 1;
+  }
+  
+  .image-text-section .text-content h2 {
+    text-align: left;
+  }
+  
+  .image-text-section .image-content {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .image-text-section img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
   /* Feature box */
   .feature-box {
     background-color: var(--dark-green3);
@@ -115,5 +146,20 @@
     
     .content-section {
       padding: 40px 5%;
+    }
+    
+    /* Responsive for image-text sections */
+    .image-text-section, 
+    .image-text-section.reverse {
+      flex-direction: column;
+    }
+    
+    .image-text-section .image-content {
+      margin-top: 20px;
+      order: -1; /* Images always appear first on mobile */
+    }
+    
+    .image-text-section.reverse .image-content {
+      order: -1;
     }
   }

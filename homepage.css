@@ -248,19 +248,19 @@ nav {
     background: var(--dark-green3);
   }
   
-  /* Hero text positioning */
+  /* Hero text positioning - FIXED */
   .hero-text {
     text-align: center;
-    
-    width: 90%; /* Slightly reduced width to ensure padding */
+    width: 90%; 
     position: absolute;
     top: auto;
     bottom: 20%;
     left: 50%;
-    transform: translateX(-10%); /* Center horizontally */
-    padding: 0; /* Reset padding for mobile */
+    transform: translateX(-50%); /* Changed from -10% to -50% to properly center */
+    padding: 0 20px; /* Added horizontal padding */
     font-size: 2rem; /* Slightly smaller font on mobile */
     word-wrap: break-word; /* Ensure text wraps if needed */
+    max-width: 100%;
   }
   
   /* Mobile navigation */
