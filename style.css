@@ -34,7 +34,7 @@ body {
   left: 0;
   width: 100%;
   padding: 30px;
-  z-index: 9999; /* Increased z-index */
+  z-index: 9999;
   mix-blend-mode: difference;
 }
 
@@ -43,7 +43,7 @@ body {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  z-index: 9999; /* Ensure it stays on top */
+  z-index: 9999;
 }
 
 .logo {
@@ -62,7 +62,7 @@ body {
   justify-content: space-between;
   cursor: pointer;
   position: relative;
-  z-index: 9999; /* Ensure it stays on top */
+  z-index: 9999;
 }
 
 .menu-toggle span {
@@ -75,12 +75,12 @@ body {
 
 .menu-toggle.active span:first-child {
   transform: translateY(9.5px) rotate(45deg);
-  background-color: #333; /* Make the X visible against the menu background */
+  background-color: #333;
 }
 
 .menu-toggle.active span:last-child {
   transform: translateY(-9.5px) rotate(-45deg);
-  background-color: #333; /* Make the X visible against the menu background */
+  background-color: #333;
 }
 
 .nav-body {
@@ -96,13 +96,14 @@ body {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.5s ease, visibility 0.5s ease;
-  z-index: 9998; /* Just below nav-header */
+  z-index: 9998;
 }
 
-/* Remove the opacity change on main content when menu opens */
-.navigation.open ~ main {
-  opacity: 1; /* Changed from 0 to 1 to keep content visible */
-  transition: opacity 0.3s ease;
+/* This is a new rule to completely hide the main content when menu is open */
+body.menu-open main {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .navigation.open .nav-body {
@@ -115,7 +116,21 @@ body {
   transform: translateY(0);
 }
 
-/* Change the backdrop behavior when menu is open */
+/* This is the key change: creating a full page overlay */
+.navigation::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f2f2f2;
+  z-index: 9997;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
 .navigation.open::before {
   content: '';
   position: fixed;
@@ -123,7 +138,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(242, 242, 242, 0.95); /* Slightly transparent background */
+  background-color: #f2f2f2; /* Solid background, not transparent */
   z-index: 98;
 }
 

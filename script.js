@@ -2,31 +2,34 @@
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Navigation toggle
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navigation = document.querySelector('.navigation');
-  
-  menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navigation.classList.toggle('open');
-    
-    // Toggle body scrolling when menu is open
-    if (navigation.classList.contains('open')) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-  });
+// Navigation toggle
+const menuToggle = document.querySelector('.menu-toggle');
+const navigation = document.querySelector('.navigation');
 
-  // Close menu when clicking on a menu item
-  const navLinks = document.querySelectorAll('.nav-links a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      navigation.classList.remove('open');
-      menuToggle.classList.remove('active');
-      document.body.style.overflow = '';
-    });
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active');
+  navigation.classList.toggle('open');
+  
+  // Toggle body scrolling and add/remove menu-open class
+  if (navigation.classList.contains('open')) {
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('menu-open'); // Add menu-open class to body
+  } else {
+    document.body.style.overflow = '';
+    document.body.classList.remove('menu-open'); // Remove menu-open class from body
+  }
+});
+
+// Close menu when clicking on a menu item
+const navLinks = document.querySelectorAll('.nav-links a');
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    navigation.classList.remove('open');
+    menuToggle.classList.remove('active');
+    document.body.style.overflow = '';
+    document.body.classList.remove('menu-open'); // Also remove menu-open class here
   });
+});
 
   // Page navigation with transitions
   const transitionLinks = document.querySelectorAll('a[href]:not([target="_blank"])');
