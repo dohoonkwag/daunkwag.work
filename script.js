@@ -2,8 +2,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Removed custom cursor code
-  
   // Navigation toggle
   const menuToggle = document.querySelector('.menu-toggle');
   const navigation = document.querySelector('.navigation');
@@ -11,6 +9,23 @@ document.addEventListener('DOMContentLoaded', () => {
   menuToggle.addEventListener('click', () => {
     menuToggle.classList.toggle('active');
     navigation.classList.toggle('open');
+    
+    // Toggle body scrolling when menu is open
+    if (navigation.classList.contains('open')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Close menu when clicking on a menu item
+  const navLinks = document.querySelectorAll('.nav-links a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navigation.classList.remove('open');
+      menuToggle.classList.remove('active');
+      document.body.style.overflow = '';
+    });
   });
 
   // Page navigation with transitions
