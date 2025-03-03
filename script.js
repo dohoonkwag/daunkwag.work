@@ -1,40 +1,9 @@
 // Initialize GSAP ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
-// Custom cursor
 document.addEventListener('DOMContentLoaded', () => {
-  const cursor = document.querySelector('.cursor');
-  const cursorFollower = document.querySelector('.cursor-follower');
-  const links = document.querySelectorAll('a, button, .menu-toggle');
+  // Removed custom cursor code
   
-  document.addEventListener('mousemove', (e) => {
-    gsap.to(cursor, {
-      x: e.clientX,
-      y: e.clientY,
-      duration: 0.1
-    });
-    
-    gsap.to(cursorFollower, {
-      x: e.clientX,
-      y: e.clientY,
-      duration: 0.3
-    });
-  });
-  
-  links.forEach(link => {
-    link.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-      cursorFollower.style.width = '0px';
-      cursorFollower.style.height = '0px';
-    });
-    
-    link.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-      cursorFollower.style.width = '40px';
-      cursorFollower.style.height = '40px';
-    });
-  });
-
   // Navigation toggle
   const menuToggle = document.querySelector('.menu-toggle');
   const navigation = document.querySelector('.navigation');
