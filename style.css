@@ -14,8 +14,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Removed custom cursor styles */
-
 /* Page transition overlay */
 .transition-overlay {
   position: fixed;
@@ -217,6 +215,18 @@ body {
   }
 }
 
+/* Two Column Content Layout */
+.two-column-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.text-content {
+  flex: 1;
+}
+
 /* Section Styling */
 .section {
   padding: 120px 0;
@@ -237,40 +247,36 @@ body {
   margin-bottom: 30px;
   position: relative;
   color: #1c2331;
-  text-align: center; /* Center all section titles */
 }
 
-.section-title::after {
+.section-title.left-aligned {
+  text-align: left;
+}
+
+.section-title.left-aligned::after {
   content: '';
   position: absolute;
-  left: 50%; /* Center line */
-  transform: translateX(-50%);
+  left: 0;
   bottom: -10px;
   width: 40px;
   height: 1px;
   background-color: #546a7b; /* Subtle blue-grey */
 }
 
-.section-title.centered {
-  text-align: center;
-}
-
-.section-title.centered::after {
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .section-text {
   max-width: 600px;
-  margin: 0 auto 30px; /* Center text with auto margins */
-  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-text.left-aligned {
+  text-align: left;
+  margin-left: 0;
 }
 
 /* Image Container */
 .image-container {
-  width: 100%;
-  height: 200px; /* Reduced height */
-  margin: 30px 0;
+  flex: 1;
+  height: 300px;
   overflow: hidden;
   position: relative;
 }
@@ -284,6 +290,18 @@ body {
 
 .image-container:hover img {
   transform: scale(1.05);
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  margin-top: 20px;
+}
+
+.social-icon {
+  margin-right: 15px;
+  font-size: 24px;
+  color: #546a7b;
 }
 
 /* Button Styling */
@@ -371,18 +389,12 @@ body {
   color: #1c2331;
 }
 
-/* Two Column Layout */
+/* Two Column Layout (original, kept for other pages) */
 .two-column {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 40px;
   margin-bottom: 60px;
-}
-
-@media (max-width: 768px) {
-  .two-column {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* Contact Form */
@@ -507,6 +519,7 @@ body {
   transition-delay: 0.4s;
 }
 
+/* Media Queries */
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 48px;
@@ -522,5 +535,19 @@ body {
 
   .nav-links a {
     font-size: 24px;
+  }
+  
+  .two-column-content {
+    flex-direction: column;
+  }
+  
+  .text-content {
+    order: 1;
+  }
+  
+  .image-container {
+    order: 2;
+    width: 100%;
+    margin-top: 30px;
   }
 }
