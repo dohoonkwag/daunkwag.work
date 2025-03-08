@@ -135,4 +135,122 @@ navLinks.forEach(link => {
       }
     });
   });
+  createMusicNotes();
+  initMusicScoreLines();
 });
+
+// Create music notes in the hero section
+function createMusicNotes() {
+  const musicContainer = document.createElement('div');
+  musicContainer.className = 'music-notes-container';
+  
+  const hero = document.querySelector('.hero');
+  hero.appendChild(musicContainer);
+  
+  const notes = ['♩', '♪', '♫', '♬', '𝄞']; // Music symbols
+  const positions = [
+    {top: '15%', left: '10%'},
+    {top: '25%', left: '85%'},
+    {top: '40%', left: '20%'},
+    {top: '65%', left: '75%'},
+    {top: '75%', left: '15%'},
+    {top: '30%', left: '40%'},
+    {top: '50%', left: '60%'},
+    {top: '70%', left: '30%'}
+  ];
+  
+  positions.forEach((pos, index) => {
+    const note = document.createElement('span');
+    note.className = 'music-note';
+    note.textContent = notes[index % notes.length];
+    note.style.top = pos.top;
+    note.style.left = pos.left;
+    note.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
+    musicContainer.appendChild(note);
+  });
+  
+  // Add interactive hover effect
+  hero.addEventListener('mousemove', (e) => {
+    const notes = document.querySelectorAll('.music-note');
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    
+    notes.forEach(note => {
+      const rect = note.getBoundingClientRect();
+      const noteX = rect.left + rect.width / 2;
+      const noteY = rect.top + rect.height / 2;
+      
+      const distance = Math.sqrt(
+        Math.pow(mouseX - noteX, 2) + 
+        Math.pow(mouseY - noteY, 2)
+      );
+      
+      if (distance < 150) {
+        const opacity = 1 - (distance / 150) * 0.5;
+        note.style.opacity = opacity;
+        note.style.transform = `rotate(${Math.random() * 30 - 15}deg) scale(1.2)`;
+        note.style.color = '#ffd700'; // Brighter gold when hovered
+      } else {
+        note.style.opacity = '0.5';
+        note.style.transform = `rotate(${Math.random() * 30 - 15}deg) scale(1)`;
+        note.style.color = '#d4af37'; // Default gold
+      }
+    });
+  });
+}
+
+// Initialize music score lines
+function initMusicScoreLines() {
+  const scoreLines = document.querySelectorAll('.gold-score-line');
+  
+  scoreLines.forEach(scoreLine => {
+    const notesContainer = scoreLine.querySelector('.score-notes');
+    const lines = scoreLine.querySelectorAll('.score-line');
+    const highlights = scoreLine.querySelectorAll('.score-line-highlight');
+    
+    // Add random notes to the staff
+    const notePositions = [20, 35, 50, 65, 80];
+    for (let i = 0; i < 8; i++) {
+      const note = document.createElement('span');
+      note.className = 'score-note';
+      note.textContent = '♪';
+      note.style.left = `${notePositions[i % 5] + Math.random() * 10}%`;
+      note.style.top = `${Math.floor(Math.random() * 5) * 7}px`;
+      notesContainer.appendChild(note);
+    }
+    
+    // Add hover interaction
+    scoreLine.addEventListener('mousemove', (e) => {
+      const rect = scoreLine.getBoundingClientRect();
+      const position = (e.clientX - rect.left) / rect.width;
+      
+      highlights.forEach(highlight => {
+        highlight.style.width = `${position * 100}%`;
+      });
+      
+      const notes = notesContainer.querySelectorAll('.score-note');
+      notes.forEach(note => {
+        const noteLeft = parseFloat(note.style.left) / 100;
+        if (noteLeft <= position) {
+          note.style.color = '#ffd700';
+          note.style.transform = 'scale(1.2)';
+        } else {
+          note.style.color = 'rgba(212, 175, 55, 0.6)';
+          note.style.transform = 'scale(1)';
+        }
+      });
+    });
+    
+    scoreLine.addEventListener('mouseleave', () => {
+      highlights.forEach(highlight => {
+        highlight.style.width = '0';
+      });
+      
+      const notes = notesContainer.querySelectorAll('.score-note');
+      notes.forEach(note => {
+        note.style.color = 'rgba(212, 175, 55, 0.6)';
+        note.style.transform = 'scale(1)';
+      });
+    });
+  });
+}

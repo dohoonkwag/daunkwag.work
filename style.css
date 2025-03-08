@@ -170,7 +170,7 @@ body.menu-open main {
   bottom: 0;
   width: 100%;
   height: 1px;
-  background-color: #333;
+  background-color: #d4af37;
   transform: translateX(-101%);
   transition: transform 0.3s ease;
 }
@@ -306,7 +306,7 @@ body.menu-open main {
   bottom: -10px;
   width: 40px;
   height: 1px;
-  background-color: #546a7b; /* Subtle blue-grey */
+  background-color: #d4af37; /* Changed from blue-grey to gold */
 }
 
 .section-title.centered {
@@ -377,7 +377,7 @@ body.menu-open main {
 .btn {
   display: inline-block;
   padding: 12px 30px;
-  border: 1px solid #546a7b;
+  border: 1px solid #d4af37; /* Changed to gold */
   color: #1c2331;
   text-decoration: none;
   font-size: 14px;
@@ -385,7 +385,7 @@ body.menu-open main {
   text-transform: uppercase;
   position: relative;
   overflow: hidden;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, box-shadow 0.3s ease;
   background-color: transparent;
   cursor: pointer;
 }
@@ -397,13 +397,14 @@ body.menu-open main {
   left: -100%;
   width: 100%;
   height: 100%;
-  background-color: #546a7b;
-  transition: transform 0.3s ease;
+  background: linear-gradient(to right, #d4af37, #f9e076, #d4af37); /* Gold gradient */
+  transition: transform 0.5s ease;
   z-index: -1;
 }
 
 .btn:hover {
-  color: #fff;
+  color: #1c2331; /* Dark text on gold background */
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); /* Gold shadow */
 }
 
 .btn:hover::before {
@@ -452,7 +453,7 @@ body.menu-open main {
   padding: 30px;
   background-color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  border-left: 3px solid #546a7b; /* Subtle color accent */
+  border-left: 3px solid #d4af37;
   width: 100%;
   overflow: hidden;
 }
@@ -527,7 +528,7 @@ body.menu-open main {
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #546a7b;
+  background-color: #d4af37;
   transition: all 0.3s ease;
 }
 
@@ -554,7 +555,7 @@ body.menu-open main {
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: #546a7b;
+  background-color: #d4af37;
   transform: translateX(-101%);
   animation: revealText 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
@@ -680,6 +681,11 @@ body.menu-open main {
   .social-icon {
     margin: 0 10px 10px;
   }
+
+  .social-icon:hover {
+    color: #ffd700; /* Brighter gold on hover */
+    transform: scale(1.2);
+  }
   
   .section {
     padding: 50px 0;
@@ -750,4 +756,76 @@ body.menu-open main {
   .scroll-line {
     height: 40px;
   }
+}
+
+/* Golden music notes background */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.music-notes-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.music-note {
+  position: absolute;
+  font-size: 60px;
+  color: #d4af37; /* Gold color */
+  opacity: 0.5;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Gold musical score line */
+.gold-score-line {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin: 60px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.score-line {
+  height: 1px;
+  width: 100%;
+  background-color: rgba(212, 175, 55, 0.3);
+  position: relative;
+}
+
+.score-line-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: #d4af37;
+  transition: width 0.5s ease;
+}
+
+.score-notes {
+  position: absolute;
+  top: -15px;
+  width: 100%;
+  height: 30px;
+}
+
+.score-note {
+  position: absolute;
+  font-size: 22px;
+  color: rgba(212, 175, 55, 0.6);
+  transition: color 0.3s ease, transform 0.3s ease;
 }
