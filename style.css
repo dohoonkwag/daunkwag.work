@@ -770,8 +770,8 @@ body.menu-open main {
 
 .typewriter-text::after {
   content: '|';
-  position: absolute;
-  right: -8px;
+  display: inline-block;
+  margin-left: 2px;
   animation: blink 0.7s infinite;
 }
 
