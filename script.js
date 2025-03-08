@@ -135,4 +135,126 @@ navLinks.forEach(link => {
       }
     });
   });
+
+  // Add this to your script.js after the existing text reveal animations
+  const heroContent = document.querySelector('.hero-content');
+  const typewriterText = document.createElement('h2');
+  typewriterText.classList.add('typewriter-text');
+  heroContent.insertBefore(typewriterText, document.querySelector('.scroll-indicator'));
+
+  // Array of descriptors that represent you
+  const descriptors = [
+    "Something I do",
+    "Another one",
+    "One more thing",
+    "Something four"
+  ];
+
+  let descriptorIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingDelay = 100;
+
+  function typeEffect() {
+    const currentDescriptor = descriptors[descriptorIndex];
+    
+    if (isDeleting) {
+      typewriterText.textContent = currentDescriptor.substring(0, charIndex - 1);
+      charIndex--;
+      typingDelay = 50;
+    } else {
+      typewriterText.textContent = currentDescriptor.substring(0, charIndex + 1);
+      charIndex++;
+      typingDelay = 150;
+    }
+    
+    if (!isDeleting && charIndex === currentDescriptor.length) {
+      isDeleting = true;
+      typingDelay = 1500; // Pause at end of word
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      descriptorIndex = (descriptorIndex + 1) % descriptors.length;
+      typingDelay = 500; // Pause before typing next word
+    }
+    
+    setTimeout(typeEffect, typingDelay);
+  }
+
+  setTimeout(typeEffect, 2000); // Start after initial animation
+
+  if (document.getElementById('particles-js')) {
+    particlesJS('particles-js', {
+      "particles": {
+        "number": {
+          "value": 40,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#d4af37" // Gold color to match your accent
+        },
+        "shape": {
+          "type": "circle",
+        },
+        "opacity": {
+          "value": 0.3,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#d4af37",
+          "opacity": 0.2,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 1,
+          "direction": "none",
+          "random": true,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 0.5
+            }
+          },
+          "push": {
+            "particles_nb": 3
+          }
+        }
+      },
+      "retina_detect": true
+    });
+  }
 });

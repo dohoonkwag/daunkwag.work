@@ -751,3 +751,31 @@ body.menu-open main {
     height: 40px;
   }
 }
+
+.hero-text-container {
+  margin-bottom: 40px;
+}
+
+/* Add this to your style.css */
+.typewriter-text {
+  font-size: 24px;
+  color: #d4af37; /* Gold color for contrast */
+  margin: 20px 0 40px;
+  height: 30px; /* Fixed height to prevent layout shift */
+  font-weight: 300;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  position: relative;
+}
+
+.typewriter-text::after {
+  content: '|';
+  position: absolute;
+  right: -8px;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
