@@ -212,6 +212,8 @@ body.menu-open main {
   position: relative;
   overflow: hidden;
   margin-bottom: 10px;
+  display: block; /* Add this line */
+  line-height: 1.2; /* Add this line */
 }
 
 .scroll-indicator {
@@ -558,11 +560,7 @@ body.menu-open main {
 }
 
 .delay-1::after {
-  animation-delay: 0.25s;
-}
-
-.delay-2::after {
-  animation-delay: 0.5s;
+  animation-delay: 0.4s;
 }
 
 @keyframes revealText {
