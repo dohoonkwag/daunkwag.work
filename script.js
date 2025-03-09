@@ -140,7 +140,7 @@ navLinks.forEach(link => {
   const heroContent = document.querySelector('.hero-content');
   const typewriterText = document.createElement('h2');
   typewriterText.classList.add('typewriter-text');
-  heroContent.insertBefore(typewriterText, document.querySelector('.scroll-indicator'));
+  heroContent.insertBefore(typewriterText, document.querySelector('.violin-icon'));
 
   // Array of descriptors that represent you
   const descriptors = [
@@ -181,6 +181,46 @@ navLinks.forEach(link => {
   }
 
   setTimeout(typeEffect, 2000); // Start after initial animation
+
+  // Animate violin strings
+  const strings = document.querySelectorAll('.violin-strings .string');
+  strings.forEach((string, index) => {
+    gsap.to(string, {
+      scaleY: 1.03,
+      duration: 1.5 + (index * 0.2),
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  });
+
+  // Animate violin icon
+  gsap.to('.violin-icon', {
+    y: 10,
+    duration: 2,
+    repeat: -1,
+    yoyo: true,
+    ease: "sine.inOut"
+  });
+
+  // Animate gold accent lines
+  gsap.to('.gold-accent-line.left', {
+    width: '100%',
+    duration: 1.5,
+    scrollTrigger: {
+      trigger: '#about-preview',
+      start: 'top 80%'
+    }
+  });
+
+  gsap.to('.gold-accent-line.right', {
+    width: '100%',
+    duration: 1.5,
+    scrollTrigger: {
+      trigger: '#services-preview',
+      start: 'top 80%'
+    }
+  });
 
   if (document.getElementById('particles-js')) {
     particlesJS('particles-js', {
